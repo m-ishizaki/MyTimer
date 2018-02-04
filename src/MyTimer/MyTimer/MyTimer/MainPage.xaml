@@ -2,10 +2,80 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:MyTimer"
-             x:Class="MyTimer.MainPage">
+             x:Class="MyTimer.MainPage"
+             xmlns:vm="clr-namespace:MyTimer.ViewModels"
+             Appearing="MainPageAppearing"
+             Disappearing="MainPageDisappearing"
+             Title="オリジナルタイマーアプリ">
+    <ContentPage.BindingContext>
+        <vm:MainPageViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <Grid>
+            <Image Source="{local:ImageResource MyTimer.Resources.Background.png}" Aspect="AspectFit" />
 
-	<Label Text="Welcome to Xamarin.Forms!" 
-           VerticalOptions="Center" 
-           HorizontalOptions="Center" />
+            <Grid BackgroundColor="#80FFFFFF">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="40"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
 
+                <Label Text="{Binding Time, StringFormat='{0:mm\\:ss}'}" HorizontalOptions="Center" VerticalOptions="Center" FontSize="Large" Grid.ColumnSpan="2" TextColor="Black" FontAttributes="Bold"/>
+
+                <Button Text="タイマー開始" Command="{Binding StartCommand}" Grid.Row="1" Grid.RowSpan="2" BackgroundColor="#80808080"/>
+
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Grid.Row="1" Grid.Column="1">
+                    <StackLayout Orientation="Horizontal">
+                        <StackLayout>
+                            <Label Text="分" HorizontalOptions="Center" TextColor="Black" FontAttributes="Bold"/>
+                            <StackLayout Orientation="Horizontal">
+                                <StackLayout>
+                                    <Label Text="10" HorizontalOptions="Center" TextColor="Black" FontAttributes="Bold"/>
+                                    <Button Text="＋" Command="{Binding AddMinutesCommand}" CommandParameter="10" BackgroundColor="#80808080"/>
+                                    <Button Text="ー" Command="{Binding AddMinutesCommand}" CommandParameter="-10" BackgroundColor="#80808080"/>
+                                </StackLayout>
+                                <StackLayout>
+                                    <Label Text="1" HorizontalOptions="Center" TextColor="Black" FontAttributes="Bold"/>
+                                    <Button Text="＋" Command="{Binding AddMinutesCommand}" CommandParameter="1" BackgroundColor="#80808080"/>
+                                    <Button Text="ー" Command="{Binding AddMinutesCommand}" CommandParameter="-1" BackgroundColor="#80808080"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </StackLayout>
+                        <StackLayout>
+                            <Label Text="秒" HorizontalOptions="Center" TextColor="Black" FontAttributes="Bold"/>
+                            <StackLayout Orientation="Horizontal">
+                                <StackLayout>
+                                    <Label Text="10" HorizontalOptions="Center" TextColor="Black" FontAttributes="Bold"/>
+                                    <Button Text="＋" Command="{Binding AddSecondsCommand}" CommandParameter="10" BackgroundColor="#80808080"/>
+                                    <Button Text="ー" Command="{Binding AddSecondsCommand}" CommandParameter="-10" BackgroundColor="#80808080"/>
+                                </StackLayout>
+                                <StackLayout>
+                                    <Label Text="1" HorizontalOptions="Center" TextColor="Black" FontAttributes="Bold"/>
+                                    <Button Text="＋" Command="{Binding AddSecondsCommand}" CommandParameter="1" BackgroundColor="#80808080"/>
+                                    <Button Text="ー" Command="{Binding AddSecondsCommand}" CommandParameter="-1" BackgroundColor="#80808080"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </StackLayout>
+                    </StackLayout>
+                </StackLayout>
+
+                <Grid Grid.Row="2" Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Switch IsToggled="{Binding UseSpeechText}" x:Name="useSpeechText"/>
+                    <Grid Grid.Column="1">
+                        <Label Text="音声ファイルを使用" HorizontalOptions="Fill" VerticalOptions="Center" HorizontalTextAlignment="Start" TextColor="Black" FontAttributes="Bold"/>
+                        <Editor Text="{Binding SpeechText}" HorizontalOptions="Fill" IsVisible="{Binding IsToggled, Source={x:Reference useSpeechText}" BackgroundColor="White"/>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
 </ContentPage>
