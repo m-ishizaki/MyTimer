@@ -9,6 +9,7 @@ using Android.OS;
 
 namespace MyTimer.Droid
 {
+    // 横画面固定の設定を行う
     [Activity(Label = "MyTimer", Icon = "@drawable/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation, ScreenOrientation =ScreenOrientation.Landscape)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
