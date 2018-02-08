@@ -34,7 +34,7 @@ namespace MyTimer
 
         private void StartTimer<T>(T sender)
         {
-            this.Navigation.PushAsync(new CountDownPage());
+            this.Navigation.PushModalAsync(new CountDownPage());
         }
 
 

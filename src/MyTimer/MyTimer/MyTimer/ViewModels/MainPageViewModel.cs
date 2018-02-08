@@ -15,7 +15,7 @@ namespace MyTimer.ViewModels
         public TimeSpan Time { get { return _time; } set { SetProperty(ref _time, value); } }
 
         // タイマー時間経過後の案内音声
-        private string _speechText = "設定時間が経過しました";
+        private string _speechText = "Time has passed";
         public string SpeechText { get { return _speechText; } set { SetProperty(ref _speechText, value); } }
 
         // タイマー時間経過後に案内音声を使うか？ （使わない場合、Audio 再生）

@@ -16,5 +16,20 @@ namespace MyTimer
 		{
 			InitializeComponent ();
 		}
-	}
+
+        private void CountDownPageAppearing(object sender, EventArgs e)
+        {
+            MessagingCenter.Subscribe<ViewModels.CountDownPageViewModel>(this, "GoBack", GoBack);
+        }
+
+        private void CountDownPageDisappearing(object sender, EventArgs e)
+        {
+            MessagingCenter.Unsubscribe<ViewModels.CountDownPageViewModel>(this, "GoBack");
+        }
+
+        private void GoBack<T>(T sender)
+        {
+            this.Navigation.PopModalAsync();
+        }
+    }
 }

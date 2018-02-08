@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Xamarin.Forms;
 
 namespace MyTimer.ViewModels
 {
@@ -16,8 +17,17 @@ namespace MyTimer.ViewModels
             private set { SetProperty(ref _time, value); }
         }
 
+        public Command GoBackCommand { get; }
+
+        private void GoBack()
+        {
+            MessagingCenter.Send(this, "GoBack");
+        }
+
         public CountDownPageViewModel()
         {
+            GoBackCommand = new Command(GoBack);
+
             _stopwatch.Start();
             Xamarin.Forms.Device.StartTimer(TimeSpan.FromMilliseconds(33), OnTimerTick);
         }
@@ -50,10 +60,10 @@ namespace MyTimer.ViewModels
 
         private async void TextToSpeech()
         {
-            await Plugin.TextToSpeech.CrossTextToSpeech.Current.Speak(TimerSettings.Instance.SpeechText);
+            await Plugin.TextToSpeech.CrossTextToSpeech.Current.Speak(TimerSettings.Instance.SpeechText, volume:0.5f);
         }
 
-        private async void PlayAudio()
+        private void PlayAudio()
         {
             try
             {
@@ -64,10 +74,7 @@ namespace MyTimer.ViewModels
                 if (!IsContainsResource(assembly, name)) return;
                 using (var stream = assembly.GetManifestResourceStream(name))
                     player.Load(stream);
-                player.Loop = true;
                 player.Play();
-                await System.Threading.Tasks.Task.Delay(3_500);
-                player.Stop();
             }
             catch (Exception ex)
             {
@@ -85,6 +92,5 @@ namespace MyTimer.ViewModels
                 Console.WriteLine(resoureName);
             return false;
         }
-
     }
 }

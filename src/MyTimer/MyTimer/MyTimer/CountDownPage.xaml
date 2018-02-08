@@ -3,7 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:MyTimer"
              x:Class="MyTimer.CountDownPage"
+             NavigationPage.HasNavigationBar="False"
              xmlns:vm="clr-namespace:MyTimer.ViewModels"
+             Appearing="CountDownPageAppearing"
+             Disappearing="CountDownPageDisappearing"
              Title="カウントダウン">
     <ContentPage.BindingContext>
         <vm:CountDownPageViewModel/>
@@ -14,6 +17,7 @@
             <Grid BackgroundColor="#80FFFFFF"/>
 
             <Label Text="{Binding Time, StringFormat='{0:mm\\:ss\\.fff}'}" HorizontalOptions="Center" VerticalOptions="Center" FontSize="96" TextColor="Black" FontAttributes="Bold"/>
+            <Button Text=" &lt; Back " Command="{Binding GoBackCommand}" BackgroundColor="#80808080" HorizontalOptions="Start" VerticalOptions="Start"/>
         </Grid>
     </ContentPage.Content>
 </ContentPage>
