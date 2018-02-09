@@ -13,6 +13,7 @@ namespace MyTimer
         {
             InitializeComponent();
 
+            // NavigationPage を使用する
             MainPage = new NavigationPage(new MyTimer.MainPage());
         }
 

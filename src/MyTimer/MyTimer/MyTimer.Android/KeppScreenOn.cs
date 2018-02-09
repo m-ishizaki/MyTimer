@@ -10,9 +10,11 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 
+// Dependency Service に Android の実装を登録
 [assembly: Xamarin.Forms.Dependency(typeof(MyTimer.Droid.KeppScreenOn))]
 namespace MyTimer.Droid
 {
+    // KeepScreenOn の Android の実装
     class KeppScreenOn : IKeepScreenOn
     {
         // Activity を static フィールドに確保
