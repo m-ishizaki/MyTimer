@@ -26,6 +26,7 @@ namespace MyTimer
             MessagingCenter.Subscribe<ViewModels.MainPageViewModel>(this, "Start", StartTimer);
         }
 
+        // 画面が表示されなくなったタイミングでの処理
         private void MainPageDisappearing(object sender, EventArgs e)
         {
             // メッセージの購読を解除する
