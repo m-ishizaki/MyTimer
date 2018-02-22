@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:MyTimer"
              x:Class="MyTimer.CountDownPage"
-             NavigationPage.HasNavigationBar="False"
              xmlns:vm="clr-namespace:MyTimer.ViewModels"
              Appearing="CountDownPageAppearing"
              Disappearing="CountDownPageDisappearing"

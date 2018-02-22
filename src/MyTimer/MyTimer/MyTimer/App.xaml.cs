@@ -13,8 +13,7 @@ namespace MyTimer
         {
             InitializeComponent();
 
-            // NavigationPage を使用する
-            MainPage = new NavigationPage(new MyTimer.MainPage());
+            MainPage = new MyTimer.MainPage();
         }
 
         protected override void OnStart()
